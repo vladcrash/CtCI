@@ -5,7 +5,7 @@ import main.java.CtCILibrary.LinkedListNode;
 import java.util.*;
 
 /**
- * {3 / 8)
+ * {4 / 8)
  * <p>
  * Created by Влад on 20.01.2019.
  */
@@ -74,5 +74,31 @@ public class ChapterTwo {
         LinkedListNode next = node.next;
         node.data = next.data;
         node.next = next.next;
+    }
+
+
+    /* ------------------------------------------------------------------------------------------------------------- */
+    // 2.4
+    // 25.04.2019
+
+    public static LinkedListNode partition(LinkedListNode head, int p) {
+        LinkedListNode first = head;
+        if (head == null)
+            return null;
+        LinkedListNode previous = head;
+        head = head.next;
+        while (head != null) {
+            if (head.data < p) {
+                previous.next = head.next;
+                head.next = first;
+                first = head;
+                head = previous.next;
+            } else {
+                previous = head;
+                head = head.next;
+            }
+        }
+
+        return first;
     }
 }
