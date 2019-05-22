@@ -5,7 +5,7 @@ import main.java.CtCILibrary.LinkedListNode;
 import java.util.*;
 
 /**
- * {4 / 8)
+ * {5 / 8)
  * <p>
  * Created by Влад on 20.01.2019.
  */
@@ -100,5 +100,97 @@ public class ChapterTwo {
         }
 
         return first;
+    }
+
+    /* ------------------------------------------------------------------------------------------------------------- */
+    // 2.5
+    // 20.05.2019
+
+    public static List<LinkedListNode> sumLists(LinkedListNode first, LinkedListNode second) {
+        List<LinkedListNode> result = new LinkedList();
+        if (first == null || second == null) {
+            return result;
+        }
+
+        boolean addOne = false;
+        while (first != null && second != null) {
+            int value = first.data + second.data;
+            if (addOne) {
+                value++;
+                addOne = false;
+            }
+            if (value >= 10)
+                addOne = true;
+            result.add(new LinkedListNode(value % 10));
+            first = first.next;
+            second = second.next;
+        }
+
+        finishList(first, result);
+        finishList(second, result);
+
+        return result;
+    }
+
+    private static void finishList(LinkedListNode head, List<LinkedListNode> result) {
+        while (head != null) {
+            result.add(new LinkedListNode(head.data));
+            head = head.next;
+        }
+    }
+
+    /* ------------------------------------------------------------------------------------------------------------- */
+    // 2.5 Follow up
+    // 21.05.2019
+
+    public static List<LinkedListNode> sumListsFollowUp(LinkedListNode first, LinkedListNode second) {
+        List<LinkedListNode> result = new LinkedList();
+        if (first == null || second == null) {
+            return result;
+        }
+        LinkedListNode shortList;
+        LinkedListNode longList;
+
+        int firstLength = calculateLength(first);
+        int secondLength = calculateLength(second);
+        int skipLength;
+        if (firstLength >= secondLength) {
+            shortList = second;
+            longList = first;
+            skipLength = firstLength - secondLength;
+        } else {
+            shortList = first;
+            longList = second;
+            skipLength = secondLength - firstLength;
+        }
+
+        LinkedListNode previous = new LinkedListNode();
+        for (int i = 0; i < skipLength; i++) {
+            result.add(longList);
+            previous = longList;
+            longList = longList.next;
+        }
+
+        while (shortList != null && longList != null) {
+            int value = shortList.data + longList.data;
+            if (value >= 10)
+                previous.data++;
+            previous = new LinkedListNode(value % 10);
+            result.add(previous);
+            shortList = shortList.next;
+            longList = longList.next;
+        }
+
+        return result;
+    }
+
+    private static int calculateLength(LinkedListNode head) {
+        LinkedListNode temp = head;
+        int length = 0;
+        while (temp != null) {
+            length++;
+            temp = temp.next;
+        }
+        return length;
     }
 }
