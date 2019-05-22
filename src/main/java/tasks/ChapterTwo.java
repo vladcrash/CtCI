@@ -1,10 +1,12 @@
-package tasks;
+package main.java.tasks;
+
+import main.java.CtCILibrary.LinkedListNode;
 
 import java.util.*;
 
 /**
- * {2 / 8)
- *
+ * {3 / 8)
+ * <p>
  * Created by Влад on 20.01.2019.
  */
 public class ChapterTwo {
@@ -35,14 +37,14 @@ public class ChapterTwo {
 
     public static void removeDuplicatesFollowUp(List<String> list) {
         boolean shouldSkip = true;
-        Iterator<String> iter =  list.iterator();
-        while(iter.hasNext()) {
+        Iterator<String> iter = list.iterator();
+        while (iter.hasNext()) {
             String outer = iter.next();
             Iterator<String> innerIter = list.iterator();
-            while(innerIter.hasNext()) {
+            while (innerIter.hasNext()) {
                 String inner = innerIter.next();
                 if (outer.equals(inner))
-                    if(!shouldSkip)
+                    if (!shouldSkip)
                         innerIter.remove();
                     else {
                         skip(innerIter);
@@ -53,12 +55,24 @@ public class ChapterTwo {
         }
     }
 
-    private static void skip(Iterator<String> iter){
-        if(iter.hasNext())
+    private static void skip(Iterator<String> iter) {
+        if (iter.hasNext())
             iter.next();
     }
 
     /* ------------------------------------------------------------------------------------------------------------- */
     // 2.2
 
+    /* ------------------------------------------------------------------------------------------------------------- */
+    // 2.3
+    // 17.04.2019
+
+    public static void deleteMiddleNode(LinkedListNode node) {
+        if (node == null || node.next == null)
+            return;
+
+        LinkedListNode next = node.next;
+        node.data = next.data;
+        node.next = next.next;
+    }
 }

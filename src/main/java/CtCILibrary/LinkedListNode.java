@@ -1,4 +1,4 @@
-package CtCILibrary;
+package main.java.CtCILibrary;
 
 /**
  * Created by Влад on 24.03.2019.
@@ -8,10 +8,20 @@ public class LinkedListNode {
     public LinkedListNode prev;
     public LinkedListNode last;
     public int data;
+
+    public LinkedListNode(int d, LinkedListNode n) {
+        data = d;
+        setNext(n);
+    }
+
     public LinkedListNode(int d, LinkedListNode n, LinkedListNode p) {
         data = d;
         setNext(n);
         setPrevious(p);
+    }
+
+    public LinkedListNode(int d) {
+        data = d;
     }
 
     public LinkedListNode() { }
