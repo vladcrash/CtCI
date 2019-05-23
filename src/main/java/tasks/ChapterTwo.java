@@ -5,7 +5,7 @@ import main.java.CtCILibrary.LinkedListNode;
 import java.util.*;
 
 /**
- * {5 / 8)
+ * {6 / 8)
  * <p>
  * Created by Влад on 20.01.2019.
  */
@@ -192,5 +192,29 @@ public class ChapterTwo {
             temp = temp.next;
         }
         return length;
+    }
+
+    /* ------------------------------------------------------------------------------------------------------------- */
+    // 2.6 Palindrome
+    // 23.05.2019
+
+    public static boolean isPalindrome(LinkedListNode head) {
+        LinkedListNode tail = head;
+        int length = 0;
+
+        while (tail != null) {
+            length++;
+            if (tail.next == null) break;
+            tail = tail.next;
+        }
+
+        for (int i = 0; i < length / 2; i++) {
+            if (head.data != tail.data)
+                return false;
+            head = head.next;
+            tail = tail.prev;
+        }
+
+        return true;
     }
 }
