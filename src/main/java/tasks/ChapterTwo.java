@@ -5,7 +5,7 @@ import main.java.CtCILibrary.LinkedListNode;
 import java.util.*;
 
 /**
- * {6 / 8)
+ * {7 / 8)
  * <p>
  * Created by Влад on 20.01.2019.
  */
@@ -216,5 +216,31 @@ public class ChapterTwo {
         }
 
         return true;
+    }
+
+    /* ------------------------------------------------------------------------------------------------------------- */
+    // 2.7 Palindrome
+    // 24.05.2019
+
+    public static LinkedListNode isIntersected(LinkedListNode first, LinkedListNode second) {
+        Set<LinkedListNode> set = new HashSet<>();
+        fill(first, set);
+        return find(second, set);
+    }
+
+    private static void fill(LinkedListNode first, Set<LinkedListNode> set) {
+        while (first != null) {
+            set.add(first);
+            first = first.next;
+        }
+    }
+
+    private static LinkedListNode find(LinkedListNode second, Set<LinkedListNode> set) {
+        while (second != null) {
+            if (set.contains(second))
+                return second;
+            second = second.next;
+        }
+        return null;
     }
 }
