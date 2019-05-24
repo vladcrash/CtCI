@@ -5,7 +5,7 @@ import main.java.CtCILibrary.LinkedListNode;
 import java.util.*;
 
 /**
- * {7 / 8)
+ * {8 / 8)
  * <p>
  * Created by Влад on 20.01.2019.
  */
@@ -219,7 +219,7 @@ public class ChapterTwo {
     }
 
     /* ------------------------------------------------------------------------------------------------------------- */
-    // 2.7 Palindrome
+    // 2.7 Intersection
     // 24.05.2019
 
     public static LinkedListNode isIntersected(LinkedListNode first, LinkedListNode second) {
@@ -242,5 +242,35 @@ public class ChapterTwo {
             second = second.next;
         }
         return null;
+    }
+
+    /* ------------------------------------------------------------------------------------------------------------- */
+    // 2.8 Loop detection
+    // 24.05.2019
+
+    public static LinkedListNode findHeadLoop(LinkedListNode head) {
+        if (head == null) return null;
+        LinkedListNode faster = head;
+        LinkedListNode slower = head;
+        boolean isLoop = false;
+        while (slower != null && faster != null && faster.next != null) {
+            slower = slower.next;
+            faster = faster.next.next;
+
+            if (slower == faster ) {
+                isLoop = true;
+                break;
+            }
+        }
+
+        if (isLoop) {
+            while (head != faster) {
+                head = head.next;
+                faster = faster.next;
+            }
+            return head;
+        } else {
+            return null;
+        }
     }
 }
