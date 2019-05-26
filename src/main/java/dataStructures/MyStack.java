@@ -1,4 +1,4 @@
-package dataStructures;
+package main.java.dataStructures;
 
 import java.util.EmptyStackException;
 
@@ -31,5 +31,9 @@ public class MyStack<E> {
 
     public boolean isEmpty() {
         return elementData.isEmpty();
+    }
+
+    public int size() {
+        return elementData.size();
     }
 }

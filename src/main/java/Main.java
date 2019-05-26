@@ -1,7 +1,7 @@
 package main.java;
 
 /**
- * {25 / 68)
+ * {26 / 68)
  *
  * Created by Влад on 01.12.2018.
  */
