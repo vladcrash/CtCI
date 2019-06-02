@@ -3,11 +3,10 @@ package main.java.tasks;
 import main.java.dataStructures.MyArrayList;
 import main.java.dataStructures.MyStack;
 
-import java.util.EmptyStackException;
-import java.util.Stack;
+import java.util.*;
 
 /**
- * {5 / 6)
+ * {6 / 6)
  * <p>
  * Created by Влад on 24.03.2019.
  */
@@ -228,5 +227,56 @@ public class ChapterThree {
             }
         }
         return min;
+    }
+
+    /* ------------------------------------------------------------------------------------------------------------- */
+    // 3.6 Animal Shelter
+    // 02.06.2019
+
+    public static class AnimalShelter {
+        private final LinkedList<Number> any;
+
+        public AnimalShelter() {
+            any = new LinkedList<>();
+        }
+
+        public void enqueue(Number animal) {
+            any.add(animal);
+        }
+
+        public Number dequeueAny() {
+            if (any.isEmpty()) return null;
+            return any.remove();
+        }
+
+        public Integer dequeueCat() {
+            Iterator<Number> iterator = any.iterator();
+            while (iterator.hasNext()) {
+                Number number = iterator.next();
+                if (number instanceof Integer) {
+                    iterator.remove();
+                    return (Integer) number;
+                }
+            }
+
+            return null;
+        }
+
+        public Double dequeueDog() {
+            Iterator<Number> iterator = any.iterator();
+            while (iterator.hasNext()) {
+                Number number = iterator.next();
+                if (number instanceof Double) {
+                    iterator.remove();
+                    return (Double) number;
+                }
+            }
+
+            return null;
+        }
+
+        public boolean isEmpty() {
+            return any.isEmpty();
+        }
     }
 }
