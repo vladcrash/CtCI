@@ -7,8 +7,8 @@ import java.util.EmptyStackException;
 import java.util.Stack;
 
 /**
- * {4 / 6)
- *
+ * {5 / 6)
+ * <p>
  * Created by Влад on 24.03.2019.
  */
 public class ChapterThree {
@@ -138,5 +138,95 @@ public class ChapterThree {
                 to.push(from.pop());
             }
         }
+    }
+
+    /* ------------------------------------------------------------------------------------------------------------- */
+    // 3.5 Sort Stack
+    // 30.05.2019
+
+    public static <E extends Comparable<E>> void sortStack(Stack<E> stack) {
+        if (stack == null || stack.isEmpty()) return;
+        int size = 1;
+        int offset = 1;
+        Stack<E> tempStack = new Stack<>();
+        E min = stack.pop();
+        while (!stack.isEmpty()) {
+            size++;
+            E temp = stack.pop();
+            if (min.compareTo(temp) > 0) {
+                tempStack.push(min);
+                min = temp;
+            } else {
+                tempStack.push(temp);
+            }
+        }
+        tempStack.push(min);
+        while (size != offset) {
+            if (offset % 2 == 0) {
+                offsetTop(stack, tempStack, offset);
+            } else {
+                offsetBottom(tempStack, stack, offset - 1, size);
+            }
+            offset++;
+        }
+
+        while (!tempStack.isEmpty())
+            stack.push(tempStack.pop());
+    }
+
+    private static <E extends Comparable<E>> void offsetTop(Stack<E> from, Stack<E> to, int offset) {
+        for (int i = 0; i < offset; i++)
+            if (!from.isEmpty()) {
+                to.push(from.pop());
+            }
+
+        if (!from.isEmpty()) {
+            E min = findMin(from, to);
+            to.push(min);
+        }
+    }
+
+    private static <E extends Comparable<E>> void offsetBottom(Stack<E> from, Stack<E> to, int offset, int size) {
+        int times = size - offset;
+        E topMin = null;
+        E min = null;
+
+        if (!from.isEmpty()) {
+            topMin = from.pop();
+            times--;
+        }
+        if (!from.isEmpty()) {
+            min = from.pop();
+            times--;
+        }
+
+        while (!from.isEmpty() && times > 0) {
+            E temp = from.pop();
+            if (min.compareTo(temp) > 0) {
+                to.push(min);
+                min = temp;
+            } else {
+                to.push(temp);
+            }
+            times--;
+        }
+        to.push(min);
+        to.push(topMin);
+        while (!from.isEmpty())
+            to.push(from.pop());
+    }
+
+    private static <E extends Comparable<E>> E findMin(Stack<E> from, Stack<E> to) {
+        E min = from.pop();
+        while (!from.isEmpty()) {
+            E temp = from.pop();
+            if (min.compareTo(temp) > 0) {
+                to.push(min);
+                min = temp;
+            } else {
+                to.push(temp);
+            }
+        }
+        return min;
     }
 }
